@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng lint && ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,7 +40,7 @@
     "eslint": "^7.6.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
     "eslint-plugin-prettier": "^3.3.1",

@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{item.name}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <button (click)="onIncr(item.id)">+</button>
+    {{item.booksInCart}}
+    <button (click)="onDcr(item.id)">-</button>
+    <button  (click)="onDel(item.id)">
+      <mat-icon aria-hidden="false">
+        shopping_cart
+      </mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

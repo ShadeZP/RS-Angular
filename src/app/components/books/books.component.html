@@ -1,0 +1,7 @@
+<section class="books-layout">
+  <app-book
+    *ngFor="let book of books"
+    [book]="book"
+    (buy)="onBuy(book)">
+  </app-book>
+</section>

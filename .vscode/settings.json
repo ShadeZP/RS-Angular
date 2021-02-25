@@ -4,6 +4,8 @@
   "extensions": [".js", ".ts", "html"]
 },
 
+"editor.formatOnSave" : true,
+
 "editor.codeActionsOnSave": {
   "source.fixAll.eslint": true,
 },

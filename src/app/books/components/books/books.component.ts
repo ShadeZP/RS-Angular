@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Ibook } from '../../modeles/book';
+import { Ibook } from '../../../modeles/book';
 
 @Component({
   selector: 'app-books',

@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Ibook, BookCategory } from '../../modeles/book';
+import { Ibook, BookCategory } from '../../../modeles/book';
 
 @Component({
   selector: 'app-book',

@@ -1,3 +1,5 @@
+import { CartService } from './../../../cart/cart.service';
+import { BooksService } from './../../books.service';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,18 +17,21 @@ import { Ibook } from '../../../modeles/book';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksComponent implements OnInit {
-  @Input() books: Ibook[];
-  @Output() buyBook = new EventEmitter<Ibook>();
-  constructor() {
-    this.books = [];
+  books: Ibook[] = [];
+  constructor(
+    private booksService: BooksService,
+    private cartService: CartService
+  ) {}
+  getBooks(): void {
+    this.booksService.getBooks().subscribe((books) => (this.books = books));
   }
 
   onBuy(book: Ibook) {
-    this.buyBook.emit(book);
+    this.cartService.buyBook(book);
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit', this.books);
+  ngOnInit() {
+    this.getBooks();
   }
   ngOnChange(): void {
     console.log('ngOnChange', this.books);

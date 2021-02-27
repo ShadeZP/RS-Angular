@@ -1,13 +1,6 @@
 <main class="main">
-<app-books
-  class="books-area"
-  [books]="books"
-  (buyBook)= "buyBook($event)">
+<app-books class="books-area">
 </app-books>
-<app-cart
-  [list]="booksToBuy"
-  (increaseBuyCount)="increaseBuyCount($event)"
-  (decreaseBuyCount)="decreaseBuyCount($event)"
-  (deleteBuyBook)="deleteBuyBook($event)">
+<app-cart>
 </app-cart>
 </main>

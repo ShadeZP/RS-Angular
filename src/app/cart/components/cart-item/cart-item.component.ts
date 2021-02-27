@@ -37,7 +37,5 @@ export class CartItemComponent implements OnInit {
     this.deleteBuyBook.emit(id);
   }
 
-  ngOnInit(): void {
-    console.log(this.item);
-  }
+  ngOnInit(): void {}
 }

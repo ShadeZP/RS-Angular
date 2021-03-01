@@ -1,61 +1,96 @@
+import { IcartData } from './../modeles/book';
 import { Injectable } from '@angular/core';
-import { Ibook, IbookToBuy } from '../modeles/book';
+import { Ibook, IcartItem } from '../modeles/book';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  booksToBuy: IbookToBuy[] = [];
+  cartData: IcartData = {
+    cartItems: [],
+    totalQuantity: 0,
+    totalPrice: 0,
+  };
   constructor() {}
 
+  updateCartTotalPrice() {
+    this.cartData.totalPrice = this.cartData.cartItems.reduce(
+      (a, b) => a + b.totalPrice,
+      0
+    );
+  }
+
+  updateCartTotalQuantity() {
+    this.cartData.totalQuantity = this.cartData.cartItems.reduce(
+      (a, b) => a + b.quantity,
+      0
+    );
+  }
+
+  updateCartItemTotalPrice(item: IcartItem) {
+    item.totalPrice = item.price * item.quantity;
+  }
+
   getList() {
-    return this.booksToBuy;
+    return this.cartData;
   }
 
   findBookById(id: number) {
-    const idx = this.booksToBuy.findIndex((item) => {
+    const idx = this.cartData.cartItems.findIndex((item) => {
       return item.id === id;
     });
     return idx;
   }
 
   buyBook(book: Ibook) {
-    const { name, id } = book;
+    const { name, id, price } = book;
     const existedBookIdx = this.findBookById(id);
     if (existedBookIdx !== -1) {
-      this.booksToBuy[existedBookIdx] = {
-        ...this.booksToBuy[existedBookIdx],
-        booksInCart: this.booksToBuy[existedBookIdx].booksInCart + 1,
+      this.cartData.cartItems[existedBookIdx] = {
+        ...this.cartData.cartItems[existedBookIdx],
+        quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
       };
+      this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
     } else {
-      const bookToBuy: IbookToBuy = {
+      const cartItem: IcartItem = {
         name,
         id,
-        booksInCart: 1,
+        price,
+        totalPrice: price,
+        quantity: 1,
       };
-      this.booksToBuy.push(bookToBuy);
+      this.cartData.cartItems = [...this.cartData.cartItems, cartItem];
     }
+    this.updateCartTotalPrice();
+    this.updateCartTotalQuantity();
   }
 
-  increaseBuyCount(id: number): void {
+  increaseQuantity(id: number): void {
     const existedBookIdx = this.findBookById(id);
-    this.booksToBuy[existedBookIdx] = {
-      ...this.booksToBuy[existedBookIdx],
-      booksInCart: this.booksToBuy[existedBookIdx].booksInCart + 1,
+    this.cartData.cartItems[existedBookIdx] = {
+      ...this.cartData.cartItems[existedBookIdx],
+      quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
     };
+    this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
+    this.updateCartTotalPrice();
+    this.updateCartTotalQuantity();
   }
 
-  decreaseBuyCount(id: number): void {
+  decreaseQuantity(id: number): void {
     const existedBookIdx = this.findBookById(id);
-    this.booksToBuy[existedBookIdx] = {
-      ...this.booksToBuy[existedBookIdx],
-      booksInCart: this.booksToBuy[existedBookIdx].booksInCart - 1,
+    this.cartData.cartItems[existedBookIdx] = {
+      ...this.cartData.cartItems[existedBookIdx],
+      quantity: this.cartData.cartItems[existedBookIdx].quantity - 1,
     };
+    this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
+    this.updateCartTotalPrice();
+    this.updateCartTotalQuantity();
   }
 
-  deleteBuyBook(id: number): void {
+  removeBook(id: number): void {
     const existedBookIdx = this.findBookById(id);
-    this.booksToBuy.splice(existedBookIdx, 1);
-    // this.booksToBuy = this.booksToBuy.filter((book) => book.id !== id);
+    this.cartData.cartItems.splice(existedBookIdx, 1);
+    this.updateCartTotalPrice();
+    this.updateCartTotalQuantity();
   }
 }

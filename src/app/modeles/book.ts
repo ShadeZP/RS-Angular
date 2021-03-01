@@ -15,8 +15,16 @@ export interface Ibook {
   id: number;
 }
 
-export interface IbookToBuy {
+export interface IcartItem {
   name: string;
-  booksInCart: number;
+  price: number;
+  totalPrice: number;
+  quantity: number;
   id: number;
+}
+
+export interface IcartData {
+  cartItems: IcartItem[];
+  totalQuantity: number;
+  totalPrice: number;
 }

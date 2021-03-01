@@ -7,22 +7,25 @@ import {
   ChangeDetectionStrategy,
   OnChanges,
 } from '@angular/core';
-import { IbookToBuy } from '../../../modeles/book';
+import { IcartData, IcartItem } from '../../../modeles/book';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent implements OnInit {
   @Output() increaseBuyCount = new EventEmitter<number>();
   @Output() decreaseBuyCount = new EventEmitter<number>();
   @Output() deleteBuyBook = new EventEmitter<number>();
-  list: IbookToBuy[] = [];
+  cartData: IcartData = {
+    cartItems: [],
+    totalQuantity: 0,
+    totalPrice: 0,
+  };
   constructor(private cartService: CartService) {}
   getList() {
-    this.list = this.cartService.getList();
+    this.cartData = this.cartService.getList();
   }
 
   ngOnInit(): void {
@@ -30,13 +33,12 @@ export class CartComponent implements OnInit {
   }
 
   onIncr(id: number) {
-    // this.increaseBuyCount.emit(id);
-    this.cartService.increaseBuyCount(id);
+    this.cartService.increaseQuantity(id);
   }
   onDcr(id: number) {
-    this.cartService.decreaseBuyCount(id);
+    this.cartService.decreaseQuantity(id);
   }
   onDel(id: number) {
-    this.cartService.deleteBuyBook(id);
+    this.cartService.removeBook(id);
   }
 }

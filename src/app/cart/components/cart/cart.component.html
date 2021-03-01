@@ -1,5 +1,9 @@
+<div>
+  <h3>Total price: {{cartData.totalPrice}}</h3>
+  <h3>Total quantity: {{cartData.totalQuantity}}</h3>
+</div>
 <app-cart-item
-  *ngFor="let item of list"
+  *ngFor="let item of cartData.cartItems"
   [item] = item
   (increaseBuyCount)="onIncr($event)"
   (decreaseBuyCount)="onDcr($event)"

@@ -4,9 +4,13 @@
       {{item.name}}
     </mat-card-title>
   </mat-card-header>
+  <mat-card-content>
+    <p>pice: {{item.totalPrice}}</p>
+    <p>quantity: {{item.quantity}}</p>
+  </mat-card-content>
   <mat-card-actions>
     <button (click)="onIncr(item.id)">+</button>
-    {{item.booksInCart}}
+    {{item.quantity}}
     <button (click)="onDcr(item.id)">-</button>
     <button  (click)="onDel(item.id)">
       <mat-icon aria-hidden="false">

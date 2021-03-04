@@ -1,12 +1,5 @@
 import { CartService } from './../../cart.service';
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  OnChanges,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IcartData, IcartItem } from '../../../modeles/book';
 
 @Component({
@@ -15,9 +8,6 @@ import { IcartData, IcartItem } from '../../../modeles/book';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  @Output() increaseBuyCount = new EventEmitter<number>();
-  @Output() decreaseBuyCount = new EventEmitter<number>();
-  @Output() deleteBuyBook = new EventEmitter<number>();
   cartData: IcartData = {
     cartItems: [],
     totalQuantity: 0,

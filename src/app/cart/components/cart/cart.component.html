@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="cartData.cartItems.length > 0;else emptyCart">
   <h3>Total price: {{cartData.totalPrice}}</h3>
   <h3>Total quantity: {{cartData.totalQuantity}}</h3>
 </div>
@@ -10,3 +10,9 @@
   (deleteBuyBook)="onDel($event)"
 >
 </app-cart-item>
+<ng-template #emptyCart>
+  <div #emptyCart>
+    <p>Yours cart is empty</p>
+    <img  src="../../../../assets/pngwing.com.png" width=100px>
+  </div>
+</ng-template>

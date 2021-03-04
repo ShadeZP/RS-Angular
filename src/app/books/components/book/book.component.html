@@ -1,4 +1,4 @@
-<mat-card class="book-card">
+<mat-card [ngClass]="{'book-disabled': !this.book.isAvailable}" class="book-card">
   <mat-card-header>
     <mat-card-title>{{book.name}}</mat-card-title>
     <mat-card-subtitle>{{book.category}}</mat-card-subtitle>

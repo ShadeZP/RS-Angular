@@ -28,3 +28,10 @@ export interface IcartData {
   totalQuantity: number;
   totalPrice: number;
 }
+
+export interface Ioption {
+  viewValue: string;
+  value: string;
+  sortValue: string;
+  isIncrease: boolean;
+}

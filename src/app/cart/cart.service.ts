@@ -46,11 +46,7 @@ export class CartService {
     const { name, id, price } = book;
     const existedBookIdx = this.findBookById(id);
     if (existedBookIdx !== -1) {
-      this.cartData.cartItems[existedBookIdx] = {
-        ...this.cartData.cartItems[existedBookIdx],
-        quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
-      };
-      this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
+      this.increaseQuantity(id);
     } else {
       const cartItem: IcartItem = {
         name,
@@ -60,17 +56,22 @@ export class CartService {
         quantity: 1,
       };
       this.cartData.cartItems = [...this.cartData.cartItems, cartItem];
+      this.updateCartTotalPrice();
+      this.updateCartTotalQuantity();
     }
-    this.updateCartTotalPrice();
-    this.updateCartTotalQuantity();
   }
 
-  increaseQuantity(id: number): void {
+  increaseQuantity(id: number) {
     const existedBookIdx = this.findBookById(id);
-    this.cartData.cartItems[existedBookIdx] = {
-      ...this.cartData.cartItems[existedBookIdx],
-      quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
-    };
+    this.cartData.cartItems = this.cartData.cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1,
+        };
+      }
+      return cartItem;
+    });
     this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
     this.updateCartTotalPrice();
     this.updateCartTotalQuantity();
@@ -78,10 +79,15 @@ export class CartService {
 
   decreaseQuantity(id: number): void {
     const existedBookIdx = this.findBookById(id);
-    this.cartData.cartItems[existedBookIdx] = {
-      ...this.cartData.cartItems[existedBookIdx],
-      quantity: this.cartData.cartItems[existedBookIdx].quantity - 1,
-    };
+    this.cartData.cartItems = this.cartData.cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        };
+      }
+      return cartItem;
+    });
     this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
     this.updateCartTotalPrice();
     this.updateCartTotalQuantity();

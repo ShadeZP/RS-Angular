@@ -6,7 +6,7 @@
   <mat-card-content>
     <p>{{book.description}}</p>
     <p>create Date: {{book.createDate}}</p>
-    <p> price: {{book.price}}$</p>
+    <p> price: {{book.price|currency:'UAH':'symbol-narrow'}}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button [disabled]=!book.isAvailable (click)="onBuy(book)">BUY</button>

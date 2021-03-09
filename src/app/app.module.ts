@@ -6,15 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CartModule } from './cart/cart.module';
 import { BooksModule } from './books/books.module';
+import { HeaderComponent } from './core/header/header.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CartModule,
     BooksModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

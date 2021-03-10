@@ -1,4 +1,5 @@
 import { TabsConfig } from '../modeles/appItems';
+import { BookCategory } from '../modeles/book';
 
 // eslint-disable-next-line no-shadow
 export enum AppPath {
@@ -37,3 +38,13 @@ export const appTabsConfig: TabsConfig[] = [
     forUser: false,
   },
 ];
+
+export const DEFAULT_BOOK = {
+  name: '',
+  description: '',
+  price: 0,
+  category: BookCategory.detective,
+  createDate: 0,
+  isAvailable: false,
+  id: 0,
+};

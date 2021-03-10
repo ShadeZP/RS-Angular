@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class RouteService {
   constructor(private router: Router) {}
   route(path: string): void {
+    console.log(path);
     this.router.navigateByUrl(path);
   }
 }

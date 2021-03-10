@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookComponent } from './books/components/book/book.component';
 import { BooksComponent } from './books/components/books/books.component';
 import { CartComponent } from './cart/components/cart/cart.component';
 import { OrderComponent } from './order/components/order/order.component';
 import { AppPath } from './shared/constans';
+import { BookDetailComponent } from './books/components/book-detail/book-detail.component';
 
 const routes: Routes = [
   { path: AppPath.productList, component: BooksComponent },
-  { path: `${AppPath.product}/:id`, component: BookComponent },
+  { path: `${AppPath.product}/:id`, component: BookDetailComponent },
   { path: AppPath.cart, component: CartComponent },
   { path: AppPath.order, component: OrderComponent },
 ];

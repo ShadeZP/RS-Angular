@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BookCategory, Ibook } from '../modeles/book';
+import { Ibook } from '../modeles/book';
 import { books } from '../mockBooks';
 import { of, Observable } from 'rxjs';
 
@@ -10,7 +10,11 @@ export class BooksService {
   constructor() {}
 
   getBooks(): Observable<Ibook[]> {
-    const booksArr = of(books);
-    return booksArr;
+    return of(books);
+  }
+
+  getBook(id: number): Observable<Ibook> {
+    // @ts-ignore
+    return of(books.find((book) => book.id === id));
   }
 }

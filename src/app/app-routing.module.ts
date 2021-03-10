@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: AppPath.cart, component: CartComponent },
   { path: AppPath.order, component: OrderComponent },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

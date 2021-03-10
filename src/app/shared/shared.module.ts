@@ -9,6 +9,5 @@ import { RouteService } from '../core/services/route.service';
   declarations: [OrderByPipe, HeaderComponent],
   imports: [CommonModule, AngularMaterialModule],
   exports: [AngularMaterialModule, OrderByPipe, HeaderComponent],
-  // providers: [RouteService],
 })
 export class SharedModule {}

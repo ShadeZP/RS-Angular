@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { IcartItem } from 'src/app/modeles/book';
+import { IcartItem } from 'src/app/modeles/cart';
 
 @Component({
   selector: 'app-cart-item',

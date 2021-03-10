@@ -1,6 +1,6 @@
-import { IcartData } from './../modeles/book';
 import { Injectable } from '@angular/core';
-import { Ibook, IcartItem } from '../modeles/book';
+import { Ibook } from '../modeles/book';
+import { IcartItem, IcartData } from '../modeles/cart';
 
 @Injectable({
   providedIn: 'root',

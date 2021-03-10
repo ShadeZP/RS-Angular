@@ -1,3 +1,5 @@
+import { AppPath } from './../../../shared/constans';
+import { RouteService } from './../../../core/services/route.service';
 import { Observable } from 'rxjs';
 import { CartService } from './../../../cart/cart.service';
 import { BooksService } from './../../books.service';
@@ -22,10 +24,15 @@ export class BooksComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-    private cartService: CartService
+    private cartService: CartService,
+    private routeService: RouteService
   ) {}
   getBooks(): void {
     this.booksService.getBooks().subscribe((books) => (this.books = books));
+  }
+
+  onDetails(bookId: number) {
+    this.routeService.route(`${AppPath.product}/:bookId`);
   }
 
   onBuy(book: Ibook) {

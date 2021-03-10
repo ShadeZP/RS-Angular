@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <button
+    mat-button
+    class="button_big"
+    *ngFor="let tab of tabs"
+    (click)="route(tab.path, $event)"
+  >
+    {{ tab.label }}
+  </button>
+</mat-toolbar>

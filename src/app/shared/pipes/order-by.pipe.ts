@@ -1,4 +1,4 @@
-import { IcartItem } from './../../modeles/book';
+import { IcartItem } from './../../modeles/cart';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

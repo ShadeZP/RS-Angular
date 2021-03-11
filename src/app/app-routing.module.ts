@@ -6,6 +6,7 @@ import { OrderComponent } from './order/components/order/order.component';
 import { AppPath } from './shared/constans';
 import { BookDetailComponent } from './books/components/book-detail/book-detail.component';
 import { HomeComponent } from './shared/components/home/home.component';
+import { AdminGuard } from './admin/guards/admin.guard';
 
 const routes: Routes = [
   { path: AppPath.empty, redirectTo: AppPath.home, pathMatch: 'full' },
@@ -14,6 +15,12 @@ const routes: Routes = [
   { path: `${AppPath.product}/:id`, component: BookDetailComponent },
   { path: AppPath.cart, component: CartComponent },
   { path: AppPath.order, component: OrderComponent },
+  {
+    path: AppPath.admin,
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canLoad: [AdminGuard],
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

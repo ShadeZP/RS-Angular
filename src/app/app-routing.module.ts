@@ -5,8 +5,11 @@ import { CartComponent } from './cart/components/cart/cart.component';
 import { OrderComponent } from './order/components/order/order.component';
 import { AppPath } from './shared/constans';
 import { BookDetailComponent } from './books/components/book-detail/book-detail.component';
+import { HomeComponent } from './shared/components/home/home.component';
 
 const routes: Routes = [
+  { path: AppPath.empty, redirectTo: AppPath.home, pathMatch: 'full' },
+  { path: AppPath.home, component: HomeComponent },
   { path: AppPath.productList, component: BooksComponent },
   { path: `${AppPath.product}/:id`, component: BookDetailComponent },
   { path: AppPath.cart, component: CartComponent },

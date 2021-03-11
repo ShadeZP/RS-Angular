@@ -6,12 +6,15 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
+  <mat-slide-toggle (change)="toggleLogin()">{{
+    this.isAuth ? "You are admin" : "You are not admin"
+  }}</mat-slide-toggle>
   <span class="example-spacer"></span>
   <button
     mat-button
     class="button_big"
     *ngFor="let tab of tabs"
-    (click)="route(tab.path, $event)"
+    (click)="route(tab.path)"
   >
     {{ tab.label }}
   </button>

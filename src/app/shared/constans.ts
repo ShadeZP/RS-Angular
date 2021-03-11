@@ -4,6 +4,7 @@ import { BookCategory } from '../modeles/book';
 // eslint-disable-next-line no-shadow
 export enum AppPath {
   empty = '',
+  home = 'home',
   productList = 'product-list',
   product = 'product',
   cart = 'cart',

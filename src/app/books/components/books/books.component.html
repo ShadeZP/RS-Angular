@@ -1,7 +1,12 @@
 <section class="books-layout">
   <app-book
-    *ngFor="let book of books"
+    *ngFor="let book of books; trackBy: trackByFn"
     [book]="book"
-    (buy)="onBuy(book)">
+    [isAuth]="isAuth$"
+    (buy)="onBuy(book)"
+>
   </app-book>
+  <button  class="add-button" mat-mini-fab color="primary" *ngIf="isAuth$" (click)="onAddNewBook()">
+    <mat-icon>add</mat-icon>
+  </button>
 </section>

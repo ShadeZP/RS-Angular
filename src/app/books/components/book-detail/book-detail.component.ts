@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../books.service';
-import { Ibook } from '../../../modeles/book';
+import { IBook } from '../../../modeles/book';
 import { DEFAULT_BOOK } from '../../../shared/constans';
 
 @Component({
@@ -11,7 +11,7 @@ import { DEFAULT_BOOK } from '../../../shared/constans';
   styleUrls: ['./book-detail.component.scss'],
 })
 export class BookDetailComponent implements OnInit {
-  book: Ibook;
+  book: IBook;
   constructor(
     private route: ActivatedRoute,
     private location: Location,

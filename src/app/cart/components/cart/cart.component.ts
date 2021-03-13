@@ -1,6 +1,6 @@
-import { CartService } from './../../cart.service';
+import { CartService } from '../../cart.service';
 import { Component, OnInit } from '@angular/core';
-import { IcartData, IcartItem, Ioption } from '../../../modeles/cart';
+import { ICartData, ICartItem, IOption } from '../../../modeles/cart';
 
 @Component({
   selector: 'app-cart',
@@ -8,12 +8,12 @@ import { IcartData, IcartItem, Ioption } from '../../../modeles/cart';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  cartData: IcartData = {
+  cartData: ICartData = {
     cartItems: [],
     totalQuantity: 0,
     totalPrice: 0,
   };
-  selectOptions: Ioption[];
+  selectOptions: IOption[];
   index: number;
 
   constructor(private cartService: CartService) {
@@ -56,7 +56,7 @@ export class CartComponent implements OnInit {
   changeIdx(event: any): void {
     this.index = this.selectOptions.findIndex((e) => e.value === event.value);
   }
-  identify(index: number, item: IcartItem) {
+  identify(index: number, item: ICartItem) {
     return item.id;
   }
 

@@ -5,7 +5,7 @@ export enum BookCategory {
   scientific = 'scientific',
 }
 
-export interface Ibook {
+export interface IBook {
   name: string;
   description: string;
   price: number;

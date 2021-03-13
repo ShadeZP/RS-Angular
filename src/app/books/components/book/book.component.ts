@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Ibook } from '../../../modeles/book';
+import { IBook } from '../../../modeles/book';
 import { AppPath, DEFAULT_BOOK } from '../../../shared/constans';
 import { RouteService } from '../../../core/services/route.service';
 
@@ -17,22 +17,30 @@ import { RouteService } from '../../../core/services/route.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit {
-  @Input() book: Ibook;
-  @Output() buy = new EventEmitter<Ibook>();
+  @Input() book: IBook;
+  @Input() isAuth: boolean;
+  @Output() buy = new EventEmitter<IBook>();
   constructor(private routeService: RouteService) {
     this.book = DEFAULT_BOOK;
+    this.isAuth = false;
   }
-  onDeatail(id: number) {
-    console.log(`${AppPath.product}/:id`);
+  onDetail(id: number) {
     this.routeService.route(`${AppPath.product}/${id}`);
   }
+  onDetailAdmin(id: number) {
+    this.routeService.route(
+      `${AppPath.admin}/${AppPath.product}/${AppPath.edit}/${id}`
+    );
+  }
 
-  onBuy(book: Ibook) {
+  onBuy(book: IBook) {
     if (book) {
       this.buy.emit(book);
     }
   }
 
   ngOnInit(): void {}
-  ngOnChange(): void {}
+  ngOnChange(): void {
+    console.log('onChange');
+  }
 }

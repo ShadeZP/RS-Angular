@@ -7,6 +7,7 @@ import { AppPath } from './shared/constans';
 import { BookDetailComponent } from './books/components/book-detail/book-detail.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { AdminGuard } from './admin/guards/admin.guard';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: AppPath.empty, redirectTo: AppPath.home, pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
     canLoad: [AdminGuard],
   },
+  { path: AppPath.false, component: PageNotFoundComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

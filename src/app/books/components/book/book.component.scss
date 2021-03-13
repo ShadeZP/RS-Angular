@@ -6,3 +6,16 @@
   margin: 10px;
   max-width: 250px;
 }
+
+.title {
+  cursor: pointer;
+}
+
+.title:hover {
+  text-decoration: underline black;
+}
+
+.edit-button {
+  margin-left: 50px;
+}
+

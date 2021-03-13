@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Ibook } from '../modeles/book';
-import { IcartItem, IcartData } from '../modeles/cart';
+import { IBook } from '../modeles/book';
+import { ICartItem, ICartData } from '../modeles/cart';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartData: IcartData = {
+  cartData: ICartData = {
     cartItems: [],
     totalQuantity: 0,
     totalPrice: 0,
@@ -27,7 +27,7 @@ export class CartService {
     );
   }
 
-  updateCartItemTotalPrice(item: IcartItem) {
+  updateCartItemTotalPrice(item: ICartItem) {
     item.totalPrice = item.price * item.quantity;
   }
 
@@ -36,19 +36,18 @@ export class CartService {
   }
 
   findBookById(id: number) {
-    const idx = this.cartData.cartItems.findIndex((item) => {
+    return this.cartData.cartItems.findIndex((item) => {
       return item.id === id;
     });
-    return idx;
   }
 
-  buyBook(book: Ibook) {
+  buyBook(book: IBook) {
     const { name, id, price } = book;
     const existedBookIdx = this.findBookById(id);
     if (existedBookIdx !== -1) {
       this.increaseQuantity(id);
     } else {
-      const cartItem: IcartItem = {
+      const cartItem: ICartItem = {
         name,
         id,
         price,

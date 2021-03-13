@@ -15,7 +15,6 @@ export class AdminGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(this.loginService.getIsLogin());
-    return this.loginService.getIsLogin();
+    return this.loginService.isLogin$;
   }
 }

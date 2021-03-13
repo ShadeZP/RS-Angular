@@ -1,9 +1,8 @@
-import { LoginService } from './../../../core/services/login.service';
-import { RouteService } from './../../../core/services/route.service';
+import { LoginService } from '../../../core/services/login.service';
+import { RouteService } from '../../../core/services/route.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TabsConfig } from 'src/app/modeles/appItems';
-import { appTabsConfig } from '../../constans';
+import { AppPath, appTabsConfig } from '../../constans';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +11,7 @@ import { appTabsConfig } from '../../constans';
 })
 export class HeaderComponent implements OnInit {
   tabs: TabsConfig[] = [];
-  isAuth = true;
+  isAuth$ = true;
   constructor(
     public routeService: RouteService,
     public loginService: LoginService
@@ -20,14 +19,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.tabs = appTabsConfig;
-    this.isAuth = this.loginService.getIsLogin();
+    this.loginService.isLogin$.subscribe((isLogin) => (this.isAuth$ = isLogin));
   }
 
   route(path: string): void {
-    this.routeService.route(path);
+    if (this.isAuth$ && path === 'product-list') {
+      this.routeService.route(`${AppPath.admin}/${path}`);
+    } else {
+      this.routeService.route(path);
+    }
   }
+
   toggleLogin() {
     this.loginService.toggleLogin();
-    this.isAuth = this.loginService.getIsLogin();
   }
 }

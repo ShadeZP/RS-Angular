@@ -11,6 +11,7 @@ export enum AppPath {
   order = 'order',
   admin = 'admin',
   edit = 'edit',
+  false = '**',
 }
 
 export const appTabsConfig: TabsConfig[] = [

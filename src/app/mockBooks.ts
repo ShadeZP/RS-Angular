@@ -1,6 +1,6 @@
-import { Ibook, BookCategory } from './modeles/book';
+import { IBook, BookCategory } from './modeles/book';
 
-export const books: Ibook[] = [
+export const books: IBook[] = [
   {
     name: 'Books #1',
     description:

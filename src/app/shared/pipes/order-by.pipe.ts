@@ -1,4 +1,4 @@
-import { IcartItem } from './../../modeles/book';
+import { ICartItem } from './../../modeles/book';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -9,7 +9,7 @@ export class OrderByPipe implements PipeTransform {
     arr: any[],
     sortingParam = 'price',
     isIncrease = false
-  ): IcartItem[] {
+  ): ICartItem[] {
     return arr.sort((a, b): number => {
       if (isIncrease) {
         if (a[sortingParam] > b[sortingParam]) return 1;

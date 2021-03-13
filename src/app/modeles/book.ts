@@ -5,7 +5,7 @@ export enum BookCategory {
   scientific = 'scientific',
 }
 
-export interface Ibook {
+export interface IBook {
   name: string;
   description: string;
   price: number;
@@ -15,7 +15,7 @@ export interface Ibook {
   id: number;
 }
 
-export interface IcartItem {
+export interface ICartItem {
   name: string;
   price: number;
   totalPrice: number;
@@ -23,13 +23,13 @@ export interface IcartItem {
   id: number;
 }
 
-export interface IcartData {
-  cartItems: IcartItem[];
+export interface ICartData {
+  cartItems: ICartItem[];
   totalQuantity: number;
   totalPrice: number;
 }
 
-export interface Ioption {
+export interface IOption {
   viewValue: string;
   value: string;
   sortValue: string;

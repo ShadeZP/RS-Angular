@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Ibook, BookCategory } from '../../../modeles/book';
+import { IBook, BookCategory } from '../../../modeles/book';
 
 @Component({
   selector: 'app-book',
@@ -15,8 +15,8 @@ import { Ibook, BookCategory } from '../../../modeles/book';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit {
-  @Input() book: Ibook;
-  @Output() buy = new EventEmitter<Ibook>();
+  @Input() book: IBook;
+  @Output() buy = new EventEmitter<IBook>();
   constructor() {
     this.book = {
       name: '',
@@ -29,7 +29,7 @@ export class BookComponent implements OnInit {
     };
   }
 
-  onBuy(book: Ibook) {
+  onBuy(book: IBook) {
     if (book) {
       this.buy.emit(book);
     }

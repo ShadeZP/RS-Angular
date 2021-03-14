@@ -6,11 +6,11 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 export class HighlightDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
   @HostListener('mouseenter')
-  itsJustFunctionsName() {
+  onMouseEnter() {
     this.highlightOn();
   }
   @HostListener('mouseleave')
-  function2() {
+  onMouseLeave() {
     this.highlightOff();
   }
   private highlightOn() {

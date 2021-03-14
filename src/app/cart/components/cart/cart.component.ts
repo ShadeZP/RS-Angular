@@ -1,13 +1,6 @@
-import { CartService } from './../../cart.service';
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  OnChanges,
-} from '@angular/core';
-import { IcartData, IcartItem } from '../../../modeles/book';
+import { CartService } from '../../cart.service';
+import { Component, OnInit } from '@angular/core';
+import { ICartData, ICartItem, IOption } from '../../../modeles/cart';
 
 @Component({
   selector: 'app-cart',
@@ -15,21 +8,56 @@ import { IcartData, IcartItem } from '../../../modeles/book';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  @Output() increaseBuyCount = new EventEmitter<number>();
-  @Output() decreaseBuyCount = new EventEmitter<number>();
-  @Output() deleteBuyBook = new EventEmitter<number>();
-  cartData: IcartData = {
+  cartData: ICartData = {
     cartItems: [],
     totalQuantity: 0,
     totalPrice: 0,
   };
-  constructor(private cartService: CartService) {}
+  selectOptions: IOption[];
+  index: number;
+
+  constructor(private cartService: CartService) {
+    this.selectOptions = [
+      {
+        viewValue: 'by decreasing price',
+        value: 'priceDecr',
+        sortValue: 'totalPrice',
+        isIncrease: false,
+      },
+      {
+        viewValue: 'by increasing price',
+        value: 'priceIncr',
+        sortValue: 'totalPrice',
+        isIncrease: true,
+      },
+      {
+        viewValue: 'by name',
+        value: 'name',
+        sortValue: 'name',
+        isIncrease: false,
+      },
+      {
+        viewValue: 'by quantity',
+        value: 'quantity',
+        sortValue: 'quantity',
+        isIncrease: false,
+      },
+    ];
+    this.index = 0;
+  }
   getList() {
     this.cartData = this.cartService.getList();
   }
 
   ngOnInit(): void {
     this.getList();
+  }
+
+  changeIdx(event: any): void {
+    this.index = this.selectOptions.findIndex((e) => e.value === event.value);
+  }
+  identify(index: number, item: ICartItem) {
+    return item.id;
   }
 
   onIncr(id: number) {

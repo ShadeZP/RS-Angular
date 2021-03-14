@@ -1,12 +1,12 @@
-import { IcartData } from './../modeles/book';
 import { Injectable } from '@angular/core';
-import { Ibook, IcartItem } from '../modeles/book';
+import { IBook } from '../modeles/book';
+import { ICartItem, ICartData } from '../modeles/cart';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartData: IcartData = {
+  cartData: ICartData = {
     cartItems: [],
     totalQuantity: 0,
     totalPrice: 0,
@@ -27,7 +27,7 @@ export class CartService {
     );
   }
 
-  updateCartItemTotalPrice(item: IcartItem) {
+  updateCartItemTotalPrice(item: ICartItem) {
     item.totalPrice = item.price * item.quantity;
   }
 
@@ -36,23 +36,18 @@ export class CartService {
   }
 
   findBookById(id: number) {
-    const idx = this.cartData.cartItems.findIndex((item) => {
+    return this.cartData.cartItems.findIndex((item) => {
       return item.id === id;
     });
-    return idx;
   }
 
-  buyBook(book: Ibook) {
+  buyBook(book: IBook) {
     const { name, id, price } = book;
     const existedBookIdx = this.findBookById(id);
     if (existedBookIdx !== -1) {
-      this.cartData.cartItems[existedBookIdx] = {
-        ...this.cartData.cartItems[existedBookIdx],
-        quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
-      };
-      this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
+      this.increaseQuantity(id);
     } else {
-      const cartItem: IcartItem = {
+      const cartItem: ICartItem = {
         name,
         id,
         price,
@@ -60,17 +55,22 @@ export class CartService {
         quantity: 1,
       };
       this.cartData.cartItems = [...this.cartData.cartItems, cartItem];
+      this.updateCartTotalPrice();
+      this.updateCartTotalQuantity();
     }
-    this.updateCartTotalPrice();
-    this.updateCartTotalQuantity();
   }
 
-  increaseQuantity(id: number): void {
+  increaseQuantity(id: number) {
     const existedBookIdx = this.findBookById(id);
-    this.cartData.cartItems[existedBookIdx] = {
-      ...this.cartData.cartItems[existedBookIdx],
-      quantity: this.cartData.cartItems[existedBookIdx].quantity + 1,
-    };
+    this.cartData.cartItems = this.cartData.cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1,
+        };
+      }
+      return cartItem;
+    });
     this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
     this.updateCartTotalPrice();
     this.updateCartTotalQuantity();
@@ -78,10 +78,15 @@ export class CartService {
 
   decreaseQuantity(id: number): void {
     const existedBookIdx = this.findBookById(id);
-    this.cartData.cartItems[existedBookIdx] = {
-      ...this.cartData.cartItems[existedBookIdx],
-      quantity: this.cartData.cartItems[existedBookIdx].quantity - 1,
-    };
+    this.cartData.cartItems = this.cartData.cartItems.map((cartItem) => {
+      if (cartItem.id === id) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        };
+      }
+      return cartItem;
+    });
     this.updateCartItemTotalPrice(this.cartData.cartItems[existedBookIdx]);
     this.updateCartTotalPrice();
     this.updateCartTotalQuantity();

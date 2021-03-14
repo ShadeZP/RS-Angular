@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a [routerLink]="['home']" routerLinkActive="active" class="link">HOME</a>
+  <mat-slide-toggle (change)="toggleLogin()" color="warn">{{
+    this.isAuth$ ? "You are admin" : "You are not prepared"
+  }}</mat-slide-toggle>
+  <span class="example-spacer"></span>
+  <button
+    mat-button
+    class="button_big"
+    *ngFor="let tab of tabs"
+    (click)="route(tab.path)"
+  >
+    {{ tab.label }}
+  </button>
+</mat-toolbar>

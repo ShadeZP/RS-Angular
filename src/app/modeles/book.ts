@@ -5,7 +5,7 @@ export enum BookCategory {
   scientific = 'scientific',
 }
 
-export interface Ibook {
+export interface IBook {
   name: string;
   description: string;
   price: number;
@@ -13,18 +13,4 @@ export interface Ibook {
   createDate: number;
   isAvailable: boolean;
   id: number;
-}
-
-export interface IcartItem {
-  name: string;
-  price: number;
-  totalPrice: number;
-  quantity: number;
-  id: number;
-}
-
-export interface IcartData {
-  cartItems: IcartItem[];
-  totalQuantity: number;
-  totalPrice: number;
 }

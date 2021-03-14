@@ -6,7 +6,9 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Ibook, BookCategory } from '../../../modeles/book';
+import { IBook } from '../../../modeles/book';
+import { AppPath, DEFAULT_BOOK } from '../../../shared/constans';
+import { RouteService } from '../../../core/services/route.service';
 
 @Component({
   selector: 'app-book',
@@ -15,26 +17,30 @@ import { Ibook, BookCategory } from '../../../modeles/book';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit {
-  @Input() book: Ibook;
-  @Output() buy = new EventEmitter<Ibook>();
-  constructor() {
-    this.book = {
-      name: '',
-      description: '',
-      price: 0,
-      category: BookCategory.detective,
-      createDate: 0,
-      isAvailable: false,
-      id: 0,
-    };
+  @Input() book: IBook;
+  @Input() isAuth: boolean;
+  @Output() buy = new EventEmitter<IBook>();
+  constructor(private routeService: RouteService) {
+    this.book = DEFAULT_BOOK;
+    this.isAuth = false;
+  }
+  onDetail(id: number) {
+    this.routeService.route(`${AppPath.product}/${id}`);
+  }
+  onDetailAdmin(id: number) {
+    this.routeService.route(
+      `${AppPath.admin}/${AppPath.product}/${AppPath.edit}/${id}`
+    );
   }
 
-  onBuy(book: Ibook) {
+  onBuy(book: IBook) {
     if (book) {
       this.buy.emit(book);
     }
   }
 
   ngOnInit(): void {}
-  ngOnChange(): void {}
+  ngOnChange(): void {
+    console.log('onChange');
+  }
 }

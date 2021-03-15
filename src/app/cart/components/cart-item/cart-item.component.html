@@ -1,18 +1,18 @@
-<mat-card>
+<mat-card appHighlight appHighBind [price]='item.totalPrice'>
   <mat-card-header>
-    <mat-card-title>
-      {{item.name}}
+    <mat-card-title [innerText] = 'item.name'>
+      <!-- {{item.name}} -->
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>pice: {{item.totalPrice}}</p>
+    <p>price: {{item.totalPrice}}</p>
     <p>quantity: {{item.quantity}}</p>
   </mat-card-content>
   <mat-card-actions>
     <button (click)="onIncr(item.id)">+</button>
     {{item.quantity}}
     <button (click)="onDcr(item.id)">-</button>
-    <button  (click)="onDel(item.id)">
+    <button (click)="onDel(item.id)">
       <mat-icon aria-hidden="false">
         shopping_cart
       </mat-icon>

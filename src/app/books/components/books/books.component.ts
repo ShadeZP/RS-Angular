@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { CartService } from './../../../cart/cart.service';
 import { BooksService } from './../../books.service';
 import {
@@ -8,7 +9,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Ibook } from '../../../modeles/book';
+import { IBook } from '../../../modeles/book';
 
 @Component({
   selector: 'app-books',
@@ -17,7 +18,8 @@ import { Ibook } from '../../../modeles/book';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksComponent implements OnInit {
-  books: Ibook[] = [];
+  books: IBook[] = [];
+
   constructor(
     private booksService: BooksService,
     private cartService: CartService
@@ -26,7 +28,7 @@ export class BooksComponent implements OnInit {
     this.booksService.getBooks().subscribe((books) => (this.books = books));
   }
 
-  onBuy(book: Ibook) {
+  onBuy(book: IBook) {
     this.cartService.buyBook(book);
   }
 

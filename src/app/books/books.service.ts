@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BookCategory, Ibook } from '../modeles/book';
+import { BookCategory, IBook } from '../modeles/book';
 import { books } from '../mockBooks';
 import { of, Observable } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { of, Observable } from 'rxjs';
 export class BooksService {
   constructor() {}
 
-  getBooks(): Observable<Ibook[]> {
+  getBooks(): Observable<IBook[]> {
     const booksArr = of(books);
     return booksArr;
   }

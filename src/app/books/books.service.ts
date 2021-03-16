@@ -13,8 +13,7 @@ export class BooksService {
     return of(books);
   }
 
-  getBook(id: number): Observable<IBook> {
-    // @ts-ignore
-    return of(books.find((book) => book.id === id));
+  getBook(id: string): Observable<IBook> {
+    return of(books.find((book) => book.id === +id)) as Observable<IBook>;
   }
 }

@@ -24,11 +24,8 @@ export class BookDetailComponent implements OnInit {
     this.getBook();
   }
   getBook(): void {
-    if (this.route.snapshot.paramMap.get('id')) {
-      // @ts-ignore
-      const id = +this.route.snapshot.paramMap.get('id');
-      this.bookService.getBook(id).subscribe((book) => (this.book = book));
-    }
+    const id = this.route.snapshot.paramMap.get('id') || '';
+    this.bookService.getBook(id).subscribe((book) => (this.book = book));
   }
 
   goBack(): void {

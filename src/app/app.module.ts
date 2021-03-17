@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { CartModule } from './cart/cart.module';
 import { BooksModule } from './books/books.module';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CartModule,

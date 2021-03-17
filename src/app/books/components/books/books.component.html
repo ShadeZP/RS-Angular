@@ -1,6 +1,6 @@
 <section class="books-layout">
   <app-book
-    *ngFor="let book of books; trackBy: trackByFn"
+    *ngFor="let book of books$ | async; trackBy: trackByFn"
     [book]="book"
     [isAuth]="isAuth$"
     (buy)="onBuy(book)"

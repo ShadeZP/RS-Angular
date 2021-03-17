@@ -5,6 +5,7 @@ import { BooksService } from '../../books.service';
 import { Component, OnInit } from '@angular/core';
 import { IBook } from '../../../modeles/book';
 import { LoginService } from '../../../core/services/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -13,7 +14,7 @@ import { LoginService } from '../../../core/services/login.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksComponent implements OnInit {
-  books: IBook[] = [];
+  books$: Observable<IBook[]> = new Observable<IBook[]>();
   isAuth$ = false;
 
   constructor(
@@ -30,7 +31,7 @@ export class BooksComponent implements OnInit {
   ngOnChange(): void {}
 
   getBooks(): void {
-    this.booksService.getBooks().subscribe((books) => (this.books = books));
+    this.books$ = this.booksService.getBooks();
   }
 
   onDetails(bookId: number) {

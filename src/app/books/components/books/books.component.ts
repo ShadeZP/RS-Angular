@@ -1,6 +1,6 @@
 import { AppPath } from '../../../shared/constans';
 import { RouteService } from '../../../core/services/route.service';
-import { CartService } from '../../../cart/cart.service';
+import { CartService } from '../../../cart/services/cart.service';
 import { BooksService } from '../../books.service';
 import { Component, OnInit } from '@angular/core';
 import { IBook } from '../../../modeles/book';

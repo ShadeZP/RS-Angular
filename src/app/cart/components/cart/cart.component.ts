@@ -1,18 +1,15 @@
-import { CartService } from '../../cart.service';
-import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ICartData, ICartItem, IOption } from '../../../modeles/cart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
-  cartData: ICartData = {
-    cartItems: [],
-    totalQuantity: 0,
-    totalPrice: 0,
-  };
+export class CartComponent implements OnInit, OnChanges {
+  cartData$: Observable<ICartData> = new Observable<ICartData>();
   selectOptions: IOption[];
   index: number;
 
@@ -46,11 +43,16 @@ export class CartComponent implements OnInit {
     this.index = 0;
   }
   getList() {
-    this.cartData = this.cartService.getList();
+    this.cartData$ = this.cartService.getList();
+    console.log(this.cartData$);
   }
 
   ngOnInit(): void {
     this.getList();
+  }
+
+  ngOnChanges(): void {
+    console.log('on change');
   }
 
   changeIdx(event: any): void {

@@ -1,4 +1,5 @@
-<div *ngIf="cartData.cartItems.length > 0;else emptyCart">
+<ng-template [ngIf]="(cartData$|async)" let-cartData>
+<div *ngIf="(cartData.cartItems.length) as length;else emptyCart">
   <h3>Total price: {{cartData.totalPrice}}</h3>
   <h3>Total quantity: {{cartData.totalQuantity}}</h3>
   <h4>Basic mat-select</h4>
@@ -11,8 +12,6 @@
     </mat-select>
   </mat-form-field>
 </div>
-
-
 <app-cart-item
   *ngFor="let item of cartData.cartItems|orderBy:selectOptions[this.index].sortValue:selectOptions[this.index].isIncrease;
   trackBy: identify"
@@ -22,6 +21,8 @@
   (deleteBuyBook)="onDel($event)"
 >
 </app-cart-item>
+</ng-template>
+
 <ng-template #emptyCart>
   <div #emptyCart>
     <p>Yours cart is empty</p>

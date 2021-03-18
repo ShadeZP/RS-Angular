@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IBook } from '../modeles/book';
-import { ICartItem, ICartData } from '../modeles/cart';
+import { IBook } from '../../modeles/book';
+import { ICartItem, ICartData } from '../../modeles/cart';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { CartHttpService } from './cart-http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +14,15 @@ export class CartService {
     totalQuantity: 0,
     totalPrice: 0,
   };
-  constructor() {}
+  cartData$: BehaviorSubject<ICartData> = new BehaviorSubject<ICartData>(
+    this.cartData
+  );
+
+  constructor(private cartHttp: CartHttpService) {
+    this.cartHttp.getBooks().subscribe((books) => {
+      this.cartData.cartItems = books;
+    });
+  }
 
   updateCartTotalPrice() {
     this.cartData.totalPrice = this.cartData.cartItems.reduce(
@@ -31,9 +42,9 @@ export class CartService {
     item.totalPrice = item.price * item.quantity;
   }
 
-  getList() {
-    return this.cartData;
-  }
+  getList(): {};
+
+  getProducts(): {};
 
   findBookById(id: number) {
     return this.cartData.cartItems.findIndex((item) => {
@@ -41,7 +52,7 @@ export class CartService {
     });
   }
 
-  buyBook(book: IBook) {
+  buyBook(book: IBook): Observable<any> {
     const { name, id, price } = book;
     const existedBookIdx = this.findBookById(id);
     if (existedBookIdx !== -1) {
@@ -54,6 +65,7 @@ export class CartService {
         totalPrice: price,
         quantity: 1,
       };
+      return this.http.put(this.cartItemUrl, cartItem);
       this.cartData.cartItems = [...this.cartData.cartItems, cartItem];
       this.updateCartTotalPrice();
       this.updateCartTotalQuantity();
